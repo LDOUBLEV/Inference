@@ -32,7 +32,7 @@ for onnx_name in ${lines[*]}; do
     done
 done
 
-cmd="python3.7 py_parser_chain.py --log_path=./output/ --output_name=TRT_onnx_fp32.excel.xlsx"
+cmd="python3.7 ../utils/log_parser.py --log_path=./output/ --output_name=TRT_onnx_fp32.excel.xlsx"
 eval $cmd
 
 
