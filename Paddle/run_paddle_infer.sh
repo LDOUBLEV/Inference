@@ -29,6 +29,7 @@ for infer_name in ${lines[*]}; do
         cmd="python3.7 inference_py.py  --model_dir=${infer_path}  --batch_size=${bs} > ${_save_log_path} 2>&1 "
         eval $cmd
         status_check $? "${cmd}" "${status_log}"
+        sleep 0.1
     done
 done
 

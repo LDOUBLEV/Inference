@@ -85,9 +85,9 @@ def process_log(file_name : str) -> dict:
             if "gpu_util:" in line_lists:
                 pos_buf = line_lists.index("gpu_util:")
                 output_dict["gpu_util"] = line_lists[pos_buf + 1].strip()
-            if "preproce_time(ms):" in line_lists:
-                pos_buf = line_lists.index("preproce_time(ms):")
-                output_dict["preproce_time(ms)"] = line_lists[pos_buf + 1].strip()
+            if "preprocess_time(ms):" in line_lists:
+                pos_buf = line_lists.index("preprocess_time(ms):")
+                output_dict["preprocess_time(ms)"] = line_lists[pos_buf + 1].strip()
             if "inference_time(ms):" in line_lists:
                 pos_buf = line_lists.index("inference_time(ms):")
                 output_dict["inference_time(ms)"] = line_lists[pos_buf + 1].strip()
@@ -115,7 +115,7 @@ def main():
                                       "precision",
                                       "enable_mkldnn",
                                       "cpu_math_library_num_threads",
-                                      "preproce_time(ms)",
+                                      "preprocess_time(ms)",
                                       "inference_time(ms)",
                                       "postprocess_time(ms)",
                                       "cpu_rss(MB)",
