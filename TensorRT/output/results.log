@@ -1,4 +1,0 @@
-[33m Run successfully with command - python3.7 inference_trt.py --onnx_file_path=./onnx_model_opset11/MobileNetV3_large_x0_5.onnx  --batch_size=1 > ./output/trt_MobileNetV3_large_x0_5.onnx_precision_fp32_batchsize_1.log 2>&1 !  [0m
-[33m Run successfully with command - python3.7 inference_trt.py --onnx_file_path=./onnx_model_opset11/MobileNetV3_large_x0_5.onnx  --batch_size=6 > ./output/trt_MobileNetV3_large_x0_5.onnx_precision_fp32_batchsize_6.log 2>&1 !  [0m
-[33m Run successfully with command - python3.7 inference_trt.py --onnx_file_path=./onnx_model_opset11/ShuffleNetV2_x0_33.onnx  --batch_size=1 > ./output/trt_ShuffleNetV2_x0_33.onnx_precision_fp32_batchsize_1.log 2>&1 !  [0m
-[33m Run successfully with command - python3.7 inference_trt.py --onnx_file_path=./onnx_model_opset11/ShuffleNetV2_x0_33.onnx  --batch_size=6 > ./output/trt_ShuffleNetV2_x0_33.onnx_precision_fp32_batchsize_6.log 2>&1 !  [0m
