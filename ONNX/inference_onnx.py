@@ -21,7 +21,6 @@ def init_args():
     parser.add_argument("--num_thread", type=int, default=1)
     parser.add_argument("--repeat_times", type=int, default=1000)
     parser.add_argument("--warmup_times", type=int, default=100)
-    parser.add_argument("--use_gpu", type=bool, default=False)
     parser.add_argument("--inputs_shape", type=str, default="3,224,224")
     parser.add_argument("--onnx_file_path", type=str, default="./onnx_model_opset11/GhostNet_x0_5.onnx")
     
@@ -33,19 +32,15 @@ def parse_args():
     return parser.parse_args()
 
 
-def build_sess(onnx_file_path="", use_gpu=False, num_thread=1):
+def build_sess(onnx_file_path="", num_thread=1):
     so = rt.SessionOptions()
     so.intra_op_num_threads = num_thread
     so.execution_mode = rt.ExecutionMode.ORT_SEQUENTIAL
     so.graph_optimization_level = rt.GraphOptimizationLevel.ORT_ENABLE_ALL
-    
-    
+     
     onnx_model = onnx.load_model(onnx_file_path)
     sess = rt.InferenceSession(onnx_model.SerializeToString(), sess_options=so)
-    if use_gpu == True:
-        sess.set_providers(['CUDAExecutionProvider'])
-    else:
-        sess.set_providers(['CPUExecutionProvider'])
+
     return sess
 
     
@@ -68,10 +63,9 @@ def inference(args):
                 batch_size=args.batch_size,
                 data_shape=inputs_shape,
                 save_path="./output/infer.log",
-                inference_config=None,
                 pids=pid,
                 process_name=None,
-                cpu_math_library_num_threads=args.num_thread,
+                inference_config={"cpu_math_library_num_threads": args.num_thread},
                 gpu_ids=0,
                 time_keys=[
                     'preprocess_time', 'inference_time', 'postprocess_time'
@@ -82,7 +76,7 @@ def inference(args):
     print('Running inference on image fake_image ...'.format())
 
     st = time.time()
-    sess = build_sess(onnx_file_path=onnx_file_path, use_gpu=args.use_gpu, num_thread=args.num_thread)
+    sess = build_sess(onnx_file_path=onnx_file_path, num_thread=args.num_thread)
     input_name = sess.get_inputs()[0].name
     output_name = sess.get_outputs()[0].name
     for i in range(args.warmup_times):
