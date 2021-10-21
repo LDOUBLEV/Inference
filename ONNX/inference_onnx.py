@@ -59,11 +59,6 @@ def inference(args):
     fake_inputs = np.ones(inputs_shape).astype(np.float32)
     onnx_file_path = args.onnx_file_path
 
-    engine_file_path = onnx_file_path[:-4] + "onnx"
-
-    if os.path.exists(engine_file_path):
-        os.system(f"rm -rf {engine_file_path}")
-
     onnx_name = os.path.basename(args.onnx_file_path)
 
     pid = os.getpid()
@@ -76,6 +71,7 @@ def inference(args):
                 inference_config=None,
                 pids=pid,
                 process_name=None,
+                cpu_math_library_num_threads=args.num_thread,
                 gpu_ids=0,
                 time_keys=[
                     'preprocess_time', 'inference_time', 'postprocess_time'
