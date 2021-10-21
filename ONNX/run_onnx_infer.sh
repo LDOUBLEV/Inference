@@ -37,7 +37,7 @@ for onnx_name in ${lines[*]}; do
                 sleep 0.1
             done
         elif [ ${USE_GPU} = "True" ]; then
-            _save_log_path="./output/onnx_${onnx_name}_precision_fp32_batchsize_${bs}_threads_${threads}_usegpu_True.log"
+            _save_log_path="./output/onnx_${onnx_name}_precision_fp32_batchsize_${bs}_threads_1_usegpu_True.log"
             cmd="python3.7 inference_onnx.py --onnx_file_path=${onnx_path}  --batch_size=${bs} > ${_save_log_path} 2>&1 "
             eval ${cmd}
             status_check $? "${cmd}" "${status_log}"
