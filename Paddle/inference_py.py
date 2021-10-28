@@ -48,7 +48,7 @@ def set_config(args):
         if args.enable_trt:
             config.enable_tensorrt_engine(
                 precision_mode=paddle_infer.PrecisionType.Float32,
-                max_batch_size=10,
+                max_batch_size=20,
                 min_subgraph_size=3)
     #config.disable_glog_info()
     pass_builder = config.pass_builder()

@@ -5,7 +5,7 @@ dataline=$(cat ${FILENAME})
 
 IFS=$'\n'
 lines=(${dataline})
-batch_size=( 1 6 )
+batch_size=( 1 16 )
 
 eval "mkdir output"
 status_log="./output/results.log"
@@ -33,8 +33,8 @@ for infer_name in ${lines[*]}; do
     done
 done
 
-cmd="python3.7 py_parser_chain.py --log_path=./output/ --output_name=TRT_paddle_inference_fp32.excel.xlsx"
-#eval $cmd
+cmd="python3.7 ../utils/log_parser.py --log_path=./output/ --output_name=TRT_paddle_inference_fp32.excel.xlsx"
+eval $cmd
 
 
 
