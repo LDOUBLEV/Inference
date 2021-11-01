@@ -136,6 +136,7 @@ def inference(args):
         print(f"run {args.warmup_times} times warmup done with {time.time() - st}s!")
 
         st = time.time()
+        output_shapes = [(1, 1000)]
         for i in range(args.repeat_times):
             autolog.times.start()
             # Preprocess 
@@ -150,6 +151,7 @@ def inference(args):
             stream.synchronize()
             # Return only the host outputs.
             trt_outputs = [out.host for out in outputs]
+            trt_outputs = [output.reshape(shape) for output, shape in zip(trt_outputs, output_shapes)]
             autolog.times.end(stamp=True)
         print(f"run {args.repeat_times} times done with {time.time() - st}s!")
         # Report log
