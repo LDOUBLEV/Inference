@@ -27,7 +27,7 @@ do
     do
         for model in $models
         do
-            model_path=${models_dir}/${model}/model.xml
+            model_path=${models_dir}/${model}/${model}.xml
             if [ -d $model_path ]
             then
                 echo "The model no exists:"${model}
