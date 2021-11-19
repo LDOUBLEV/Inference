@@ -34,7 +34,9 @@ def set_config(args):
         config = paddle_infer.Config(model_file, model_params)
     else:
         raise ValueError(f"The model dir {args.model_dir} does not exists!")
-
+    
+    # enable memory optim
+    config.enable_memory_optim()
     #config.disable_gpu()
     config.set_cpu_math_library_num_threads(args.threads)
     config.switch_ir_optim(True)
